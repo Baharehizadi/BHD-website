@@ -109,6 +109,78 @@ Passionate about innovation, I work across AI-driven design, branding, UX/UI, an
 
 
 
+<!-- Portfolio Button -->
+<section id="portfolio-button">
+    <div class="portfolio-btn-container">
+        <button id="open-portfolio">View My Works</button>
+    </div>
+</section>
+
+<!-- Portfolio Modal -->
+<div id="portfolio-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-slider">
+            <!-- تصاویر و ویدیوها توسط JS اضافه می‌شوند -->
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<section id="portfolio-links">
+    <div class="title-text">
+        <p>My Websites</p>
+        <h1>Check Out My Work</h1>
+    </div>
+
+    <div class="links-grid">
+        <a href="https://papkogroup.com" target="_blank" class="site-link">
+            <div class="site-card">
+                <img src="./photo/l1.jpg" alt="Site 1">
+                <h3>Website 1</h3>
+                <p>Creative and responsive design</p>
+            </div>
+        </a>
+
+        <a href="https://rudiger-group.com" target="_blank" class="site-link">
+            <div class="site-card">
+                <img src="./photo/l2.jpg" alt="Site 2">
+                <h3>Website 2</h3>
+                <p>Create-Modern UI/UX and branding</p>
+            </div>
+        </a>
+
+        <a href="https://ekalato.com.com" target="_blank" class="site-link">
+            <div class="site-card">
+                <img src="./photo/L3.jpg" alt="Site 3">
+                <h3>Website 3</h3>
+                <p>Create-Modern UI/UX and branding</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
 
     <section id="feature">
         <div class="title-text">
@@ -165,6 +237,27 @@ Passionate about innovation, I work across AI-driven design, branding, UX/UI, an
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section id="service">
         <div class="title-text">
             <p>SERVICES</p>
@@ -218,6 +311,23 @@ Passionate about innovation, I work across AI-driven design, branding, UX/UI, an
             </div>
         
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section id="testimonial">
         <div class="title-text">
             <p>testimonial</p>
@@ -305,7 +415,77 @@ Passionate about innovation, I work across AI-driven design, branding, UX/UI, an
 
 
 
-
+       <script>
+        const openBtn = document.getElementById('open-portfolio');
+        const modal = document.getElementById('portfolio-modal');
+        const modalSlider = modal.querySelector('.modal-slider');
+        const closeBtn = modal.querySelector('.close');
+        const prevBtn = modal.querySelector('.prev');
+        const nextBtn = modal.querySelector('.next');
+        
+        let currentIndex = 0;
+        
+        // نمونه کارها: تصاویر و ویدیوها
+        const items = [
+            { type: 'image', src: './photo/055887.jpg' },
+            { type: 'image', src: './photo/01001205.jpg' },
+            { type: 'image', src: './photo/01001210.jpg' },
+            { type: 'image', src: './photo/dkdkdkdk.jpg' },
+            { type: 'image', src: './photo/jjjjjiii.jpg' },
+            { type: 'image', src: './photo/odododl.jpg' },
+            { type: 'image', src: './photo/00.jpg' },
+            { type: 'image', src: './photo/01.jpg' },
+            { type: 'image', src: './photo/02.jpg' },
+            
+            
+        ];
+        
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            renderSlider();
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modalSlider.innerHTML = '';
+        });
+        
+        window.addEventListener('click', e => { 
+            if(e.target === modal) modal.style.display = 'none';
+        });
+        
+        function renderSlider() {
+            modalSlider.innerHTML = '';
+            items.forEach((item, index) => {
+                let element;
+                if(item.type === 'image'){
+                    element = document.createElement('img');
+                    element.src = item.src;
+                } else {
+                    element = document.createElement('video');
+                    element.src = item.src;
+                    element.autoplay = true;
+                    element.loop = true;
+                    element.muted = true;
+                    element.controls = true;
+                }
+                element.style.display = (index === currentIndex) ? 'block' : 'none';
+                modalSlider.appendChild(element);
+            });
+        }
+        
+        function showSlide(n) {
+            const slides = modalSlider.children;
+            if(n >= slides.length) currentIndex = 0;
+            if(n < 0) currentIndex = slides.length - 1;
+            for(let i=0;i<slides.length;i++) slides[i].style.display = 'none';
+            slides[currentIndex].style.display = 'block';
+        }
+        
+        nextBtn.addEventListener('click', () => { currentIndex++; showSlide(currentIndex); });
+        prevBtn.addEventListener('click', () => { currentIndex--; showSlide(currentIndex); });
+        </script>
+        
 
 
 
